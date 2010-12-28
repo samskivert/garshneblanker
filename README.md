@@ -1,4 +1,4 @@
-= Garshneblanker
+# Garshneblanker
 
 Garshneblanker was a screen saver I wrote for the Amiga, starting back
 in about 1992, but not really gaining widespread use until the 3.x
