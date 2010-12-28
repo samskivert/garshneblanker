@@ -1,0 +1,343 @@
+@database "Garshneblanker" -*- text -*-
+@master "Garshneblanker.guide"
+@author Michael D. Bayne
+
+@width 80
+@wordwrap
+
+@$VER: Garshneblanker 38.8 (31.12.94)
+@Remark AmigaGuide database for Garshneblanker
+
+@Node Main "Garshneblanker Documentation"
+
+@{b}Garshneblanker Release 3.6 (Version 38.8)@{ub}
+
+Happy New Year!
+
+It's the new Garshneblanker! Have no fear in running the Install script for
+there's a Remove script if you decide you don't like it (aren't I nice). If
+you are currently running Garshneblanker on your system, be sure to quit
+that one because running this one will just pop up the interface for any
+other currently running Garshneblanker and I wouldn't want you to confuse
+yourself.
+
+Run the installer script and read what it says while you install it. Other
+than that, check out the following things:
+
+     @{" New stuff                          " Link "New"}
+     @{" Things to note when using GBlanker " Link "Notes"}
+     @{" On the agenda                      " Link "Agenda"}
+
+If you have any questions, suggestions or other comments regarding
+Garshneblanker or just the state of the universe, please send them my way at
+either of the following addresses:
+
+Electronic Mail: mbayne@qualcomm.com
+
+Physical Mail:   Michael D. Bayne
+                 1522 La Playa Apt. 5-110
+                 (Sunny) San Diego, CA
+                 92109
+
+@EndNode
+
+@Node New "New Stuff in This Release"
+
+History for this release:
+
+@{" Version 38.8 " Link Version388 }
+@{" Version 38.7 " Link Version387 }
+
+History for previous releases:
+
+@{" Version 38.6 " Link Version386 }
+@{" Version 38.5 " Link Version385 }
+@{" Version 38.4 " Link Version384 }
+@{" Version 38.3 " Link Version383 }
+
+@EndNode
+
+@Node Version388 "Version 38.8 History"
+
+Version 38.8	Release 3.6
+
+o Johan Billing sent me a SpotLight blanker.
+
+o Changed the interface all around so that all configuration is in the
+  tooltypes. Under 3.x when you select the "Settings" button, it opens Info
+  on it's icon but unfortunately under 2.x you can't do that so it just
+  displays the values of the tooltypes.
+
+o Added CPU checking support that should really work this time. It's well
+  tested and has behaved reasonably for all the beta-testers.
+
+o Made the "Info" display an asynchronous process so you can go Info crazy
+  and have all sorts of info displays on your screen. (I must have a
+  multi-threading fetish).
+
+o Messed with organization of this readme.
+
+o Reworked the Plasma module entirely so it uses much less memory and draws
+  the Plasma in a more interesting manner.
+
+o Raymond Penners sent me a Lightning blanker.
+
+o Lot's of little fixes.
+
+@EndNode
+
+@Node Version387 "Version 38.7 History"
+
+Version 38.7	Internal
+
+o I wrote a TicTacToe blanker.
+
+o Made the text blanker split long lines up into two or more instead of just
+  truncating them.
+
+o Separated the user interface code into it's own section so that all
+  interface libraries could be closed while the preferences window is
+  closed.
+
+o Wrote MUI and BGUI interfaces.
+
+o Rearranged the source tree more easily support different interface
+  versions.
+
+o Removed all the interface code from the blankers and made a separate
+  interface interpreter that generates a preferences file that is read by
+  the blanker. So now the blankers are much smaller and writing blankers is
+  even easier.
+
+o Wrote MUI and BGUI versions of the blanker preferences interface
+  interpreters. (Unfortunately no GadTools version. Perhaps a BOOPSI version
+  to come but since the libraries aren't open all the time, there are no
+  memory concerns so I don't see any good reason to write a BOOPSI version.)
+
+@EndNode
+
+@Node Version386 "Version 38.6 History"
+
+Version 38.6	Release 3.5
+
+o Broke down and used MagicWB icons in the distribution. You 4 color non-
+  interlaced Workbench having users are just going to have to cope.
+
+o Rearranged the user interface a bit since the addition of the blank corner
+  cycle gadgets made it look a bit long.
+
+o Took out the menus since they didn't do anything important. Lost the
+  "About" requester. No more shameless plug for the author. If anyone just
+  can't do without the menu hot keys or something, let me know and I'll put
+  'em back in.
+
+o Made a version of the interface that uses MUI. Fell out of my chair when I
+  found out that it used 250k more memory than the gadtools version. Got
+  excited when BGUI came out. Weeped over the fact that it was 100k. Played
+  with a BGUI version of the interface. Look for a full-on BGUI version with
+  BUI modules as well in the near future. If anyone really digs MUI and has
+  RAM falling out of their machine, email me for the MUI version.
+
+o Removed all of the code shared among the blankers and put it in a shared
+  library. "Shared" code, "shared" library. Isn't that keen. That made all
+  the blankers a nice bit smaller.
+
+o Reorganized the main program with regards to source file organization and
+  some other groovy internal stuff. Also cleaned up the whole source tree in
+  general and wrote some nifty scripts to make compiling the modules easier.
+
+@EndNode
+
+@Node Version385 "Version 38.5 History"
+
+Version 38.5	Internal 3.4
+
+o Added stuff to the blankers that people had asked for. Fading on the ones
+  that copy the top screen. If you're using V39+, palette extension for
+  smoother color transitions in Plasma and Interference. Unfortunately, in
+  V37 the "Extend Palette" gadgets don't do anything. Oh well. Get OS3.1.
+  Added some other stuff. Stared at the Puzzle source and wondered where it
+  could possibly have a divide by zero error.
+
+o Implemented the blank corners thing that a few people have suggested. I'm
+  not entirely happy with it's performance because in order not to suck down
+  huge amounts of CPU, I chuck all but the last mouse event. However, as a
+  result of that, sometimes when you put the pointer in the corner, the last 
+  mouse position I looked at wasn't when the mouse was at 0,0.
+
+o Took out reqtools.library dependancy in main blanker interface. The only
+  thing still using reqtools.library in the main program was the "About"
+  requester and the "Info" display. Changed those to use EasyRequests. Alas,
+  no more pressing return to make them go away. Also, the "Info" display is
+  no longer asynchronous. So if you are browsing through the blankers and
+  run out of the house, GBlanker will be locked up because the "Info" panel
+  is up. Your screen is just going to burn. Tragic, I know.
+
+o Fixed bugs and probably changed other stuff. It's been so long since 38.4
+  that I don't remember what was in 38.4.
+
+@EndNode
+
+@Node Version384 "Version 38.4 History"
+
+Version 38.4	Release 3.3a
+
+o This is mostly a bug-fix release. A number of people reported problems
+  with the CPU load checking feature and others reported problems with
+  the screen simply refusing to unblank at times. So I've tried to fix
+  both problems. (The difficult part here being that neither problem
+  occurs on MY machine. :) The CPU load checking is simply turned off but
+  the unblank problem should be fixed. Be sure to let me know if it recurs.
+
+o Also in this release is a nifty new Maze blanker that I wrote. It's cool
+  have a look.
+
+@EndNode
+
+@Node Version383 "Version 38.3 History"
+
+Version 38.3	Release 3.3
+
+o If the module doesn't respond to a blank request in a timely manner
+  (ie. you're compiling and it's being starved because of it's -5
+  priority) a black screen is put up.
+
+o When the blankers are running, they call a particular function every
+  so often to see if they should unblank. If these are too far and few
+  in between, they quit and the main program puts up a black screen.
+  This means two things: one, maybe I've got it calibrated for an A3000
+  matching my machine's description and this totally won't work on every
+  one elses machine (I hope not, I think this should work, give it a chance
+  and e-mail me if blankers bail out unnecessarily on your machine), and
+  two, if a blanker starts using too much of the CPU time itself (you just
+  love to watch Swarm struggle with 500 wasps on your A500) it might quit
+  of it's own accord. That's too bad. GBlanker won't load your machine down
+  TOO much regardless of what's running. I like this solution because it
+  doesn't use any CPU time keeping track of CPU usage. I tried another
+  method where I had a low priority task send the main program messages at
+  specified intervals and blanked with a black screen if the low priority
+  task wasn't getting much CPU time, but that used 50% of the CPU time when
+  the machine was idle. Ack. Anyhow, let me know how this works because I've
+  moved away from all my beta testers (they're back at school, I'm on the
+  other side of the country now, happily employed. :)
+
+o Lots of little changes to the modules that people have suggested. Like
+  multiple speed toasters, puzzle moves blocks smoothly, stars are back,
+  etc.
+
+@EndNode
+
+@Node Notes "Things to note when using GBlanker"
+
+Ok. The interface is really straightforward. You should be able to figure
+all that out, but some things have consistently eluded many people in
+previous releases so be sure to note this stuff:
+
+o Look at the tooltypes of the Garshneblanker icon! If those aren't there,
+  strange things might happen. (GBlanker is not happy when it doesn't know
+  where it's blanker modules are.) Check them out, it should be apparent
+  what they are. This is where you can change stuff. If you want to change
+  the pop key. Change the CX_POPKEY tool type to the new pop key. This goes
+  for all of them.
+
+o When you click on a blanker in the list view, it runs that process. So,
+  don't go clicking like a manaic on the list view because DOS has a hard
+  time keeping up with loading all those processes and such.
+
+o The "Toggle" button tells GBlanker whether or not you want to consider
+  the selected blanker when picking a random blanker. If a blanker is
+  shown in parenthesis (ie. "(FlyingToasters)"), then it won't be picked as
+  a random blanker. If you parenthesise ALL of them and select "Random",
+  Garshneblanker will do strange stuff (it will hang out until you select
+  another blanker and then blank with that one). I know. Don't do that.
+  (Unless you think it's fun, in which case do it all day long, at least it
+  doesn't hurt animals.)
+
+o All the modules will default to the same screen mode as your Workbench
+  screen (and differing numbers of colors). Some of them don't look very good
+  in HiRes. Until I mess with the BestScreenMode() stuff in V39 intuition,
+  try some of the blankers in low-res, they look a lot better and run much
+  faster (like Life, Plasma, Fireworks, Interference, etc.). Resolution is
+  often not as important as number of colors. In fact, Plasma looks really
+  cool in 256 colors on a 160x100 screen (obscure AGA mode).
+
+o Check out the "Info"s on the modules. Some of them say useful things. Also
+  they should all give credit to those who have supported Garshneblanker by
+  writing their own modules or porting them from other blankers, :).
+
+That's about it. Again if you have any questions comments or suggestions.
+E-mail me. I'm more likely to respond to regular postal mail than I was
+before but it'll take a heck of a lot longer. So if you can email, do that
+first.
+
+@EndNode
+
+@Node Agenda "Things on my agenda for Garshneblanker"
+
+Ok. Here's where I get to list all the stuff that would be cool to have.
+Some are suggestions from others, so it could be that I've gotten your
+suggestion but have simply chosen to ignore it :) or more likely haven't had
+time to get to it yet. My damned boss thinks that I should work for him 8
+hours a day which I think is really silly, but I guess I have to put up with
+it.
+
+Here we go:
+
+From arigr@cc.uch.gr
+
+- A bazillion things that would take a team of programmers two lifetimes
+  to implement (just kidding :). However I won't list them all.
+
+- Sound support
+
+- Analog clock
+
+- Fade to blanker screen
+
+From he241sc@unidui.uni-duisberg.de:
+
+- A Tetris blanker
+
+- An Eyes blanker
+
+From jayrymal@utcc.utoronto.ca:
+
+- Rushing through parallel squares that form a tunnel
+
+From Ken Pierce:
+
+- Falling cow blanker
+
+From numerous people:
+
+- Joystick port monitoring
+
+- Password protection
+
+From others who I didn't write down:
+
+- Multiple prefs files for each blanker (like earlier and more complicated
+  version 2.0 :)
+
+- Change a .plan file somewhere to reflect that owner is away from machine
+  (for netted Amigas)
+
+Stuff I want to do:
+
+- Make the Client-Server interaction entirely use AREXX. And add AREXX support
+  to the server so that people can have strange things done when they blank
+  and then run a regular blanker.
+
+- Run MaxxonMAGIC blankers (bastard's are trying to SELL a screen blanker,
+  what do they think this is, a Mac?)
+
+If anyone feels up to the adventurous task of writing their own modules. I
+suggest the following plan of action. Look at the source code for some of
+the simple ones like Fade and Worms. Then change the stuff in one of those
+to work for yours (this is really simple) and then clean it up and make the
+prefs do what you want and voila! your very own blanker. Then hoard it to
+yourself or mail it to me or make it publicly available at your local ftp
+site. If you send it to me (and it's relatively bug free :) I'll include it
+in the distribution.
+
+@EndNode
