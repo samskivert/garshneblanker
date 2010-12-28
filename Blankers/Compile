@@ -1,0 +1,14 @@
+.key TARGET/A,NAME/A
+
+FailAt 25
+
+IF EQ <NAME> Moiré
+	echo  Invoking 'make <TARGET>' on <NAME>
+	cd <NAME>
+	make <TARGET> -s -f ../Makefile NAME=<NAME>
+ELSE
+	echo  Invoking 'smake <TARGET>' on <NAME>
+	cd <NAME>
+	smake <TARGET> -s -f /SMakefile NAME=<NAME>
+ENDIF
+cd /

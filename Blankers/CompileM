@@ -1,0 +1,8 @@
+.key TARGET/A,NAME/A
+
+FailAt 25
+
+echo  Invoking 'smake <TARGET>' on <NAME>
+cd <NAME>
+smake <TARGET> -s -f /SMakefile MATH="MATH=IEEE" NAME=<NAME>
+cd /

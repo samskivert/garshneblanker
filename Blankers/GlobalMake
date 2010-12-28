@@ -1,0 +1,29 @@
+.key TARGET/A
+
+echo Performing a 'Compile <TARGET>' on all blankers.
+echo ""
+
+Compile  <TARGET> ASwarm
+Compile  <TARGET> Clock
+CompileM <TARGET> Dragon
+Compile  <TARGET> Executor
+Compile  <TARGET> Fade
+Compile  <TARGET> Fireworks
+Compile  <TARGET> FlyingToaster
+CompileM <TARGET> Fractal
+Compile  <TARGET> Goats
+CompileM <TARGET> GoldenSpiral
+Compile  <TARGET> Interference
+Compile  <TARGET> Life
+CompileM <TARGET> Lightning
+Compile  <TARGET> Maze
+Compile  <TARGET> Moiré
+Compile  <TARGET> Plasma
+Compile  <TARGET> Puzzle
+Compile  <TARGET> Rain
+Compile  <TARGET> Species
+Compile  <TARGET> Spotlight
+Compile  <TARGET> Star
+Compile  <TARGET> Text
+Compile  <TARGET> TicTacToe
+CompileM <TARGET> Worms
