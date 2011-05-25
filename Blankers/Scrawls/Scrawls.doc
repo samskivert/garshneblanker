@@ -1,0 +1,113 @@
+
+                    GarshneBlanker modules collection 
+		    ---------------------------------
+                                 volume I
+				 --------
+
+                         version 1.0 (Jan 24 1995)
+
+                  programs, sources and documentation are
+                      copyright 1995 Marzio De Biasi
+                            All Rights Reserved
+
+
+                              Scrawls blanker
+                              ***************
+                                   v1.0
+                           technical information
+
+
+Description
+-----------
+
+  This blanker calculates the attractor of a random generated iterated
+  function system (IFS).
+
+  An IFS is a set of maps f1, f2, ... , fN of the plane to itself:
+
+  fi =
+	
+	{ x' = a * x + b * y + c
+	{
+	{ y' = d * x + e * y + f
+
+
+  which, under particular conditions, has an unique attractor (invariant
+  set), that is a set A that satisfies the following equation:
+
+		A = f1[A] U f2[A] U ... U fN[A]
+
+  Given a point P that belongs to A, the points f1[P], f2[P], ... , fN[P]
+  belong to A too.
+  The attractor A can be approximated recursively applying one of the
+  f1 ... fN (randomly choosen) to a starting point P of A.
+
+  The attractor is a fractal that CAN looks very good on a computer monitor;
+  unlikely, there is no way (I think) to establish whether an IFS will
+  generate a beautiful attractor or will only generate strange scrawls.
+
+  However, observe this blanker for some minutes, and you'll probably
+  see some good stuff.
+
+
+
+
+Garshneblanker preference window
+--------------------------------
+
+  You can set the following parameters:
+
+  Equations	: number of functions of the IFS.
+  ---------	  You can obtain good results with only three equations,
+		  but if you use a lot of equations and you are VERY
+		  VERY LUCKY you can get something that looks like a tree,
+		  a mountain, a human face or a Picasso's painting.
+
+  Factor	: the greter absolute value that will assume c and f 
+  ------	  parameters in IFS equations.
+
+  Iterations	: number of iterations used for drawing an attractor:
+  ----------	  higher values correspond to a better defined attractor.
+
+  Zoom		: if you obtain only small attractors, try increasing 
+  ----		  zoom value.
+
+  Delay		: drawing speed; lower values correspond to a greater speed.
+  -----
+
+
+
+
+Algorithm description
+---------------------
+
+  NITER		: number of iterations
+  NF		: number of functions  
+  FUN(N)	: Nth function, its parameters are indicated with
+		  FUN(N).a, FUN(N).b, .... , FUN(N).f
+  FUN(N).prob   : probability assigned to function N
+		  FUN(1).prob + FUN(2).prob + ... + FUN(NF-1).prob = 1
+  COLOR(x,y)	: color of pixel at (x,y)
+
+
+  - for each 0 <= I < NF randomly set FUN(I).a, FUN(I).b, ... , FUN(I).prob
+
+  - randomly choose a point P=(x,y)
+
+  - execute the following steps 20 times
+
+	- randomly choose a function I
+	- calculate P' = FUN(I)[P]
+	- set P = P'
+
+
+  - execute the following steps NITER times
+
+	- randomly choose a number Z between 0 and 1
+	- find the first function I that satisfies the following
+
+		(FUN(1).prob + ... + FUN(I).prob) - Z <= 0
+
+	- calculate P' = FUN(I)[P]
+	- set P = P'
+	- set COLOR(x,y) = COLOR(x,y) + 1

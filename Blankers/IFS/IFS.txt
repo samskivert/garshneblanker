@@ -1,0 +1,10 @@
+IFS Blanker
+
+by Karlheinz Agsteiner
+
+This module generates all kinds of
+clouds, spirals, and other bizarre
+structures based on iterated function
+systems. It was inspired by a xlock
+blanker called "fire". Looks best
+with high resolution and 8 colors.

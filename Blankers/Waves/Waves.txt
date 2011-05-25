@@ -1,0 +1,13 @@
+
+        Waves Blanker
+
+Copyright © 1995 by Marzio De Biasi
+  (E-Mail: debiasi@dimi.uniud.it)
+
+The blanker builds a wavy pattern on
+the screen (as if some stones were
+thrown in a calm pool); then the
+waves start moving, but not in the
+same way as in the real world!
+
+Enjoy it!

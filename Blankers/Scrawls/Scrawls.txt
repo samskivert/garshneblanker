@@ -1,0 +1,12 @@
+
+            Scrawls Blanker
+
+  Copyright © 1995 by Marzio De Biasi
+    (E-Mail: debiasi@dimi.uniud.it)
+
+This blanker builds a random iterared
+function system (IFS), and displays its
+attractor.
+If you don't know anything about IFS',
+consider all that graphic stuff as
+God's scrawls.

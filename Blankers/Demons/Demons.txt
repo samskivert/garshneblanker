@@ -1,0 +1,12 @@
+
+         Demons Blanker
+
+Copyright © 1995 by Marzio De Biasi
+  (E-Mail: debiasi@dimi.uniud.it)
+
+Yet another cellular automata ...
+
+After a lot of generations only
+few chaotic demons survive:
+the dead ones change into beatiful
+rainbow spirals.

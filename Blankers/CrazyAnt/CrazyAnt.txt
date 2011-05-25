@@ -1,0 +1,14 @@
+
+       Crazy Ant Blanker
+
+Copyright © 1995 by Marzio De Biasi
+  (E-Mail: debiasi@dimi.uniud.it)
+
+A crazy ant, with a random 
+"bit-string" brain, walks in
+a bidimensional grid and
+changes the color of the grid
+cells according to its taste ...
+
+If you watch it for hours, you'll
+learn more about madness!

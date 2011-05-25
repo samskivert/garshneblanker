@@ -1,0 +1,6 @@
+5
+CYCLE	"S_peed"	p 7 Slooow Sloow Slow Normal Fast Faast Faaast 3
+DELIM
+SLIDER	"Si_ze"		z 16 64 32
+DELIM
+DISPLAY 0

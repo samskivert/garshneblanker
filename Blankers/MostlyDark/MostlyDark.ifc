@@ -1,0 +1,6 @@
+5
+SLIDER De_nsity n 1 10 7
+DELIM
+SLIDER D_elay e 0 10 2
+DELIM
+DISPLAY 5

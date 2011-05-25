@@ -1,0 +1,11 @@
+Cubes Blanker
+
+by Karlheinz Agsteiner
+
+Draws graphics like the Amigabasic demo
+which name I don't recall right now shipped
+with Workbench 1.x.
+
+Looks best with 16 or more colors. With
+less colors, a very simple coloring scheme
+is used.

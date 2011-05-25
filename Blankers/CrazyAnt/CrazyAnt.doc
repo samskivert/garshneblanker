@@ -1,0 +1,83 @@
+
+                    GarshneBlanker modules collection 
+		    ---------------------------------
+                                 volume I
+				 --------
+
+                         version 1.0 (Jan 24 1995)
+
+                  programs, sources and documentation are
+                      copyright 1995 Marzio De Biasi
+                            All Rights Reserved
+
+
+                             CrazyAnt blanker
+                             ****************
+                                   v1.0
+                           technical information
+
+
+Description
+-----------
+
+  The screen represents a 2D finite grid; at first, each cell of the grid
+  is black (few of them can be randomly coloured).
+
+  A crazy ant (the white cell) is placed in the center of the grid, then
+  the ant starts its long trip: at each tick, it changes the color of the
+  cell where it is, turns itself 90 degrees left or right (the choice is
+  made by its crazy-brain) and move forward one step.
+
+  The ant dies when it gets out of the screen, but a new ant is suddenly
+  set free.
+
+  The random-ant produces nice configurations that seems not to be so
+  random!!!
+
+
+
+
+Garshneblanker preference window
+--------------------------------
+
+  You can set the following parameters:
+
+  Ant size	: the size of the grid-cells (and of the ant).
+  --------
+
+  Initial blobs : number of cells that are randomly coloured before the
+  -------------   ant is set free; the configurations will be very
+		  interesting even though there are no initial blobs.
+
+  Delay		: ant speed; lower values correspond to a faster ant.
+  -----
+
+
+
+
+Algorithm description
+---------------------
+
+  NC		: screen colors		(NC = 2 ^ Screen_depth)  
+  GRID_W	: grid width		(GRID_W = Screen_width / ant_size)
+  GRID_H	: grid height		(GRID_H = Screen_height / ant_size)
+  GRID(x,y)	: color of cell at (x,y)
+  BRAIN		: ant's brain, a vector of NC bits
+  (ANT_X, ANT_Y): ant's position  
+  DIRECTION	: ant's direction (0 = N, 1 = E, 2 = S, 3 = W)
+
+
+  - while (ANT_X, ANT_Y) is inside screen region repeats these steps
+
+	- c = GRID(ANT_X, ANT_Y)
+
+	- if ( BRAIN[c] == 1) 
+		then DIRECTION = (DIRECTION + 1) mod 4
+		else DIRECTION = (DIRECTION + 3) mod 4
+
+	- GRID(ANT_X, ANT_Y) = (c + 1) mod NC
+
+	- moves ant one step in direction DIRECTION
+
+	- redraws new-coloured cell and ant 
+

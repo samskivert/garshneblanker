@@ -1,0 +1,12 @@
+11
+SLIDER "_Equations" e 1 20 4
+DELIM
+SLIDER "_Factor" f 1 50 4
+DELIM
+SLIDER "_Iterations x 100" i 1 200 80
+DELIM
+SLIDER "_Zoom" z 1 100 20
+DELIM
+SLIDER "_Delay" d 0 10 0
+DELIM
+DISPLAY 4

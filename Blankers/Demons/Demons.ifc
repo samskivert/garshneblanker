@@ -1,0 +1,10 @@
+9
+SLIDER "Cells _size" s 1 20 6
+DELIM
+SLIDER "_Colors" c 3 24 12
+DELIM
+SLIDER "_Width" w 10 640 40
+DELIM
+SLIDER "_Height" h 10 512 25
+DELIM
+DISPLAY 4

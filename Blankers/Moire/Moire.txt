@@ -1,0 +1,11 @@
+Moiré Blanker
+
+by Michael D. Bayne
+
+This was my first blanker. It draws
+bouncing lines around the screen and
+provides for a bunch of neat variations.
+
+Try setting Trail to a low number and
+Lines to a high one. On a fast machine
+it looks neat.

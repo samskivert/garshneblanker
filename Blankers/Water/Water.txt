@@ -1,0 +1,8 @@
+Water Blanker
+
+by Karlheinz Agsteiner
+
+A very fast blanker simulating water and
+gravitation. Looks great with 8-16 colors
+on a high resolution screen. Don't use
+128 or more colors.

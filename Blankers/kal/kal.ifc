@@ -1,0 +1,6 @@
+5
+CYCLE	"_Speed"	s 7 Slooow Sloow Slow Normal Fast Faast Faaast 3
+DELIM
+SLIDER	"_Lines"	l 5 25 12
+DELIM
+DISPLAY 0

@@ -1,0 +1,13 @@
+12
+SLIDER "_Functions"		f 2 10 6
+DELIM
+SLIDER "_Iterations"		i 10 1000 300
+DELIM
+CYCLE  "_Area"			a 2 Special Uniformal 0
+CYCLE  "T_ranspose"             r 2 Yes No 0
+DELIM
+SLIDER "_ContProb"		c 0 200 110
+DELIM
+SLIDER "_Decrease"		d 0 200  10
+DELIM
+DISPLAY 3

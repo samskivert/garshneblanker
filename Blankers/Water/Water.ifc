@@ -1,0 +1,6 @@
+5
+SLIDER  "_Drops"    d 10 4000 500
+DELIM
+SLIDER  "_Time"     t 100 2000 1000
+DELIM
+DISPLAY 4

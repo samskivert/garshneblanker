@@ -1,0 +1,17 @@
+16
+SLIDE "_Rhythms"                r 1 100 5
+DELIM
+SLIDE "_Duration"               d 10 10000 500
+DELIM
+SLIDE "D_elay"                  e 0 100 1
+DELIM
+SLIDE "_Width"                  w 20 200 50
+DELIM
+SLIDE "_Height"                 h 20 200 50
+DELIM
+CYCLE "_Submode"                s 2 "Single lamp" "Row of lamps" 1
+CYCLE "_Background"             b 2 Black Grey 1
+DELIM
+SLIDE "_Free"                   f 0 100 50
+DELIM
+DISPLAY 4

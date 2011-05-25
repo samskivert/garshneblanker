@@ -1,0 +1,9 @@
+Bouncing Balls Blanker
+
+by Stefano Reksten and Andrew Richards
+
+
+This blanker was originally designed by
+Stefano as a module for his BServer
+blanker program. It was ported to work
+with GBlanker and modified by Andrew.

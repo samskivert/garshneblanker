@@ -1,0 +1,10 @@
+9
+SLIDER "S_pots" p 1 5 3
+DELIM
+SLIDER "_Wave Lenght" w 5 120 50
+DELIM
+SLIDER "Si_ze" z 1 10 4
+DELIM
+SLIDER "D_elay" e 0 50 15
+DELIM
+DISPLAY 5

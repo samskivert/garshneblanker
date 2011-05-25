@@ -1,0 +1,8 @@
+7
+SLIDER "Ant _size" s 2 20 4
+DELIM
+SLIDER "Initial _blobs" b 0 1000 100
+DELIM
+SLIDER "_Delay" d 0 50 1
+DELIM
+DISPLAY 4

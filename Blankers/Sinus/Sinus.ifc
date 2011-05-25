@@ -1,0 +1,10 @@
+9
+CYCLE "_SimplePics"		l 7 Never Seldom Sometimes Half Often Mostly Always 3
+DELIM
+SLIDER "_Range Param"           r 1 100 10
+DELIM
+SLIDER "_Duration"		d 1 1000 99
+DELIM
+SLIDER "D_elay"                 e 0 60 0
+DELIM
+DISPLAY 4

@@ -1,0 +1,8 @@
+Sinus Blanker
+
+by Karlheinz Agsteiner
+
+This module draws nice  geometrical figures
+based on  a simple formula containing  some 
+sinuses. Looks best with lots of colors and 
+high resolution.
