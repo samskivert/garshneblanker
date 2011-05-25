@@ -20,14 +20,13 @@ LONG GetVar37( STRPTR Name, STRPTR Buffer, LONG Size, ULONG Flags )
 
 	if(!( DOSBase = OpenLibrary( "dos.library", 37L )))
 		return -1;
-	
-	if( SysBase->lib_Version < 39 )
-	{
+
+	if (SysBase->lib_Version < 39) {
 		BYTE VarFileName[108];
 		BPTR VarFile;
 
-		strcpy( VarFileName, "ENVARC:" );
-		AddPart( VarFileName, Name, 108 );
+		strcpy(VarFileName, "ENVARC:");
+		AddPart(VarFileName, Name, 108);
 
 		if( VarFile = Open( VarFileName, MODE_OLDFILE ))
 		{
@@ -38,7 +37,7 @@ LONG GetVar37( STRPTR Name, STRPTR Buffer, LONG Size, ULONG Flags )
 				else
 				{
 					LONG Bytes = Read( VarFile, Buffer, Size );
-
+					
 					Buffer[min( Bytes, Size-1 )] = '\0';
 					RetVal = min( Bytes, Size-1 );
 				}
@@ -57,7 +56,7 @@ LONG GetVar37( STRPTR Name, STRPTR Buffer, LONG Size, ULONG Flags )
 	}
 	else
 		RetVal = GetVar( Name, Buffer, Size, Flags );
-
+	
 	CloseLibrary( DOSBase );
 	
 	return RetVal;
@@ -80,10 +79,10 @@ LONG SetVar37( STRPTR Name, STRPTR Buffer, LONG Size, ULONG Flags )
 		{
 			BYTE VarFileName[108];
 			BPTR VarFile;
-
+			
 			strcpy( VarFileName, "ENVARC:" );
 			AddPart( VarFileName, Name, 108 );
-
+			
 			if( VarFile = Open( VarFileName, MODE_NEWFILE ))
 			{
 				if(( Flags & GVF_DONT_NULL_TERM )||
@@ -100,8 +99,8 @@ LONG SetVar37( STRPTR Name, STRPTR Buffer, LONG Size, ULONG Flags )
 				return FALSE;
 		}
 	}
-
+	
 	CloseLibrary( DOSBase );
-
+	
 	return TRUE;
 }
