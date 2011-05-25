@@ -1,6 +1,6 @@
 #define	VERSION		38
-#define	REVISION	1
-#define	DATE	"6.11.94"
-#define	VERS	"LineBlanker 38.1"
-#define	VSTRING	"LineBlanker 38.1 (6.11.94)\r\n"
-#define	VERSTAG	"\0$VER: LineBlanker 38.1 (6.11.94)"
+#define	REVISION	2
+#define	DATE	"9.2.95"
+#define	VERS	"LineBlanker 38.2"
+#define	VSTRING	"LineBlanker 38.2 (9.2.95)\r\n"
+#define	VERSTAG	"\0$VER: LineBlanker 38.2 (9.2.95)"

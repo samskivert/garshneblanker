@@ -174,6 +174,7 @@ LONG Blank( PrefObject *Prefs )
 		Scr = OpenScreenTags( 0L, SA_Depth, Prefs[MODE].po_Depth,
 							 SA_Overscan, OSCAN_STANDARD, SA_Quiet, TRUE,
 							 SA_DisplayID, Prefs[MODE].po_ModeID,
+							 SA_ShowTitle, FALSE, SA_Title, "Garshnescreen",
 							 SA_Behind, TRUE, TAG_DONE );
 		if( Scr )
 		{

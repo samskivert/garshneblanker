@@ -62,7 +62,8 @@ LONG Blank( PrefObject *Prefs )
 	OldCoords = AllocVec( Stars * sizeof( Coord2D ), MEMF_CLEAR );
 	Scr = OpenScreenTags( 0L, SA_Depth, 2, SA_Overscan, OSCAN_STANDARD,
 						 SA_DisplayID, Prefs[4].po_ModeID, SA_Behind, TRUE,
-						 SA_Quiet, TRUE, TAG_DONE );
+						 SA_Quiet, TRUE, SA_ShowTitle, FALSE, SA_Title,
+						 "Garshnescreen", TAG_DONE );
 
 	if( Coords && OldCoords && Scr )
 	{

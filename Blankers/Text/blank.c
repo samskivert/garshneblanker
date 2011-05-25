@@ -137,8 +137,9 @@ LONG Blank( PrefObject *Prefs )
 	
 	TextScr = OpenScreenTags( 0l, SA_DisplayID, Prefs[MODE].po_ModeID,
 							 SA_Depth, 1, SA_Quiet, TRUE, SA_Behind, TRUE,
-							 SA_Overscan, OSCAN_STANDARD,
-							 SA_Font, &( Prefs[FONT].po_Attr ), TAG_DONE );
+							 SA_Overscan, OSCAN_STANDARD, SA_ShowTitle, FALSE,
+							 SA_Font, &( Prefs[FONT].po_Attr ), SA_Title,
+							 "Garshnescreen", TAG_DONE );
 	if( !TextScr )
 		goto JAIL;
 

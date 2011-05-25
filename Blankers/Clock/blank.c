@@ -119,21 +119,12 @@ LONG Blank( PrefObject *Prefs )
 		goto JAIL;
 
 	delay = Prefs[DELAY].po_Level;
-	
 	Prefs[FONT].po_Attr.ta_Name = Prefs[FONT].po_Name;
-	font = OpenDiskFont(&( Prefs[FONT].po_Attr ));
-	if( !font )
-	{
-		strcpy( Prefs[FONT].po_Attr.ta_Name, "topaz.font" );
-		font = OpenDiskFont(&( Prefs[FONT].po_Attr ));
-	}
-	base = font->tf_Baseline;
-	fonty = Prefs[FONT].po_Attr.ta_YSize;
-	
+
 	Scr = OpenScreenTags( 0l, SA_DisplayID, Prefs[MODE].po_ModeID, SA_Depth, 1,
 						 SA_Quiet, TRUE, SA_Overscan, OSCAN_STANDARD,
-						 SA_Behind, TRUE, SA_Font, &Prefs[FONT].po_Attr,
-						 TAG_DONE );
+						 SA_ShowTitle, FALSE, SA_Title, "Garshnescreen",
+						 SA_Behind, TRUE, TAG_DONE );
 	if( Scr )
 	{
 		Wid = Scr->Width;
@@ -159,6 +150,19 @@ LONG Blank( PrefObject *Prefs )
 			break;
 		}
 		
+		Wnd = BlankMousePointer( Scr );
+		ScreenToFront( Scr );
+		
+		font = OpenDiskFont(&( Prefs[FONT].po_Attr ));
+		if( !font )
+		{
+			strcpy( Prefs[FONT].po_Attr.ta_Name, "topaz.font" );
+			font = OpenDiskFont(&( Prefs[FONT].po_Attr ));
+		}
+		base = font->tf_Baseline;
+		fonty = Prefs[FONT].po_Attr.ta_YSize;
+		
+		SetFont( RP, font );
 		numc = getTime( scrClock, Prefs );
 		while(( len = TextLength( RP, scrClock, numc )) >= Wid )
 			numc--;
@@ -169,9 +173,6 @@ LONG Blank( PrefObject *Prefs )
 		SetAPen( RP, 1 );
 		Move( RP, x, y + base );
 		Text( RP, scrClock, numc );
-		
-		Wnd = BlankMousePointer( Scr );
-		ScreenToFront( Scr );
 		
 		while( RetVal == OK )
 		{

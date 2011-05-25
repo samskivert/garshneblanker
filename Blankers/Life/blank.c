@@ -176,9 +176,9 @@ LONG Blank( PrefObject *Prefs )
 	Gens = Prefs[GENS].po_Level;
 	
 	LScr = OpenScreenTags( 0l, SA_DisplayID, Prefs[MODE].po_ModeID,
-						  SA_Depth, Prefs[MODE].po_Depth,
-						  SA_Quiet, TRUE, SA_Behind, TRUE,
-						  SA_Overscan, OSCAN_TEXT, TAG_DONE );
+						  SA_Depth, Prefs[MODE].po_Depth, SA_ShowTitle, FALSE,
+						  SA_Quiet, TRUE, SA_Behind, TRUE, SA_Title,
+						  "Garshnescreen", SA_Overscan, OSCAN_TEXT, TAG_DONE );
 	if( LScr )
 	{
 		r = &( LScr->RastPort );

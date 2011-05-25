@@ -29,16 +29,21 @@ LONG Blank( PrefObject *Prefs )
 	struct RastPort *Rast;
 	struct Screen *Scr;
 	struct Window *Wnd;
+	LONG d, xs, ys, rs;
 	
 	Drops = Prefs[0].po_Level;
 	
 	Scr = OpenScreenTags( 0L, SA_Depth, Prefs[2].po_Depth, SA_Quiet, TRUE,
 						 SA_Overscan, OSCAN_STANDARD, SA_Behind, TRUE,
-						 SA_DisplayID, Prefs[2].po_ModeID, TAG_DONE );
+						 SA_DisplayID, Prefs[2].po_ModeID, SA_ShowTitle, FALSE,
+						 SA_Title, "Garshnescreen", TAG_DONE );
 	if( Scr )
 	{
 		Wid = Scr->Width;
 		Hei = Scr->Height;
+		d = min( Wid, Hei );
+		xs = 3 * Wid;
+		ys = 4 * Hei;
 		
 		Rast = &( Scr->RastPort );
 		SetRast( Rast, 0 );
@@ -57,9 +62,13 @@ LONG Blank( PrefObject *Prefs )
 			if(!( ToFrontCount % Drops ))
 				SetRast(&( Scr->RastPort ), 0 );
 			
-			r = RangeRand( Wid/13 ) + Wid/25;
-			x = RangeRand( Wid - 2*r ) + r;
-			y = RangeRand( Hei - 2*r ) + r;
+			r = RangeRand( d/13 ) + d/25;
+			if( Wid > Hei )
+				rs = r * xs / ys;
+			else
+				rs = r * ys / xs;
+			x = RangeRand( Wid - 2*rs ) + rs;
+			y = RangeRand( Hei - 2*rs ) + rs;
 			
 			incr = max( Wid/160, 1 );
 
@@ -69,12 +78,27 @@ LONG Blank( PrefObject *Prefs )
 				SetAPen( &Scr->RastPort,
 						( ULONG )RangeRand(( 1L << Prefs[2].po_Depth ) - 1 )
 						+ 1 );
-				DrawEllipse(&( Scr->RastPort ), x, y, i, i );
-				if( i )
+				if( Wid > Hei )
 				{
-					SetAPen(&( Scr->RastPort ), 0 );
-					DrawEllipse(&( Scr->RastPort ), x, y, i - incr, i - incr );
+					DrawEllipse(&( Scr->RastPort ), x, y, i * xs / ys, i );
+					if( i )
+					{
+						SetAPen(&( Scr->RastPort ), 0 );
+						DrawEllipse(&( Scr->RastPort ), x, y,
+									xs * ( i - incr ) / ys, i - incr );
+					}
 				}
+				else
+				{
+					DrawEllipse(&( Scr->RastPort ), x, y, i, ys * i / xs );
+					if( i )
+					{
+						SetAPen(&( Scr->RastPort ), 0 );
+						DrawEllipse(&( Scr->RastPort ), x, y, i - incr,
+									( i - incr ) * ys / xs );
+					}
+				}
+
 			}
 			
 			RetVal = ContinueBlanking();

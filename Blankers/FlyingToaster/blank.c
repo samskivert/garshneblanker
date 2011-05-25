@@ -124,6 +124,7 @@ LONG Blank( PrefObject *Prefs )
 	Toasters = AllocVec( sizeof( Toaster ) * NumToasters, MEMF_CLEAR );
 	FTScr = OpenScreenTags( NULL, SA_DisplayID, Prefs[MODE].po_ModeID,
 						   SA_Depth, 4, SA_Overscan, OSCAN_STANDARD,
+						   SA_ShowTitle, FALSE, SA_Title, "Garshnescreen",
 						   SA_Type, CUSTOMSCREEN, SA_Quiet, TRUE,
 						   SA_Behind, TRUE, TAG_DONE );
 	if( Toasters && FTScr )

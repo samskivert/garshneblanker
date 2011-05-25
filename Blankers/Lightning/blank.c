@@ -126,8 +126,9 @@ LONG Blank( PrefObject *Prefs )
 	struct Window *Wnd;
 	
 	Scr = OpenScreenTags( 0L, SA_DisplayID, Prefs[4].po_ModeID, SA_Depth, 2,
-						 SA_Quiet, TRUE, SA_Behind, TRUE,
-						 SA_Overscan, OSCAN_STANDARD, TAG_DONE );
+						 SA_Quiet, TRUE, SA_Behind, TRUE, SA_ShowTitle, FALSE,
+						 SA_Title, "Garshnescreen", SA_Overscan,
+						 OSCAN_STANDARD, TAG_DONE );
 	if( Scr )
 	{
 		Forkiness = Prefs[0].po_Level;

@@ -1,0 +1,8 @@
+Line Blanker
+
+by Michael D. Bayne and Andrew Richards
+
+Originally designed by Michael, and
+modified and fixed by Andrew.
+Clears the screen in five different 
+methods using lines.

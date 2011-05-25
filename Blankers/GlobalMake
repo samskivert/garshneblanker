@@ -5,6 +5,8 @@ echo ""
 
 Compile  <TARGET> ASwarm
 Compile  <TARGET> Clock
+CompileM <TARGET> CrazyAnt
+CompileM <TARGET> Demons
 CompileM <TARGET> Dragon
 Compile  <TARGET> Executor
 Compile  <TARGET> Fade
@@ -21,6 +23,7 @@ Compile  <TARGET> Moiré
 Compile  <TARGET> Plasma
 Compile  <TARGET> Puzzle
 Compile  <TARGET> Rain
+CompileM <TARGET> Scrawls
 Compile  <TARGET> Species
 Compile  <TARGET> Spotlight
 Compile  <TARGET> Star

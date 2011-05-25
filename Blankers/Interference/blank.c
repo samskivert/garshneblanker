@@ -22,7 +22,7 @@ VOID Defaults( PrefObject *Prefs )
 LONG Interference( struct Screen *Scr )
 {
 	LONG Wid = Scr->Width, Hei = Scr->Height, RetVal = OK, Pixel = 0, x, y;
-	LONG factor, Colors = ( 1L << Scr->BitMap.Depth ) - 1;
+	LONG factor, Colors = ( 1L << Scr->BitMap.Depth ) - 1, sc;
 	LONG Transition =  Colors * 2 - 1, PixelVal;
 	struct RastPort *R = &( Scr->RastPort );
 
@@ -33,7 +33,17 @@ LONG Interference( struct Screen *Scr )
 	{
 		for( x = -Wid / 2 + 1; x <= 0; x++ )
 		{
-			PixelVal =  (( x * x + y * y ) / factor ) % Transition;
+			if( Wid > Hei )
+			{
+				sc = x * 4 * Hei / ( Wid * 3 );
+				PixelVal =  (( sc * sc + y * y ) / factor ) % Transition;
+			}
+			else
+			{
+				sc = y * 3 * Wid / ( Hei * 4 );
+				PixelVal =  (( x * x + sc * sc ) / factor ) % Transition;
+			}
+
 			if( PixelVal >= Colors )
 				PixelVal = Transition - PixelVal;
 			
@@ -70,6 +80,7 @@ LONG Blank( PrefObject *Prefs )
 	
 	Scr = OpenScreenTags( 0L, SA_Depth, Prefs[2].po_Depth, SA_Quiet, TRUE,
 						 SA_Overscan, OSCAN_STANDARD, SA_Behind, TRUE,
+						 SA_ShowTitle, FALSE, SA_Title, "Garshnescreen",
 						 SA_DisplayID, Prefs[2].po_ModeID, TAG_DONE );
 	if( Scr )
 	{

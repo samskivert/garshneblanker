@@ -22,6 +22,10 @@ LONG RenderLines( struct Screen *LScr, USHORT Mode )
 	int i, x, y, midx, midy, x2, y2;
 	LONG RetVal = OK;
 	
+	/* Check if random Mode was selected */
+	if (Mode == 5)
+		Mode = RangeRand(5);
+
 	SetAPen( rp, 1 );
 	switch( Mode )
 	{
@@ -30,25 +34,33 @@ LONG RenderLines( struct Screen *LScr, USHORT Mode )
 		 */
 		midy = LScr->Height - 2 - ( LScr->Height - 1 ) % 2;
 		midx = LScr->Width - 2 - ( LScr->Width - 1 ) % 2;
-		for( i = 0; i < 4 && RetVal == OK; i += 2 )
+
+		/* First Draw from top left to bottom right */
+		Move( rp, 0, 0 );
+		Draw( rp, LScr->Width - 1, LScr->Height - 1 );
+		for( i = 0; (i < 4) && (RetVal == OK); i += 2 )
 		{
 			for( x = i, x2 = midx - i;
-				x < LScr->Width-1 &&(( RetVal = ContinueBlanking()) == OK );
+				(x < LScr->Width-1) &&(RetVal == OK);
 				x += 4, x2 -= 4 )
 			{
+				if(x2<0) x2=0;
 				Move( rp, x2, LScr->Height - 1 );
 				Draw( rp, x, 0 );
 				Move( rp, x2, 0 );
 				Draw( rp, x, LScr->Height - 1 );
+				RetVal = ContinueBlanking();
 			}
 			for( y = i, y2 = midy - i;
-				y < LScr->Height-1 &&(( RetVal = ContinueBlanking()) == OK );
+				(y < LScr->Height-1) &&(RetVal == OK);
 				y += 4, y2 -= 4 )
 			{
+				if(y2<0) y2=0;
 				Move( rp, 0, y2 );
 				Draw( rp, LScr->Width - 1, y );
 				Move( rp, LScr->Width - 1, y2 );
 				Draw( rp, 0, y );
+				RetVal = ContinueBlanking();
 			}
 		}
 		break;
@@ -57,36 +69,28 @@ LONG RenderLines( struct Screen *LScr, USHORT Mode )
 		 */
 		midx = LScr->Width / 2;
 		midy = LScr->Height / 2;
-		for( i = 0; i < 4; i++ )
+		for( i = 0; (i < 4) &&(RetVal == OK); i++ )
 		{
-			for( x = i; x < LScr->Width; x += 4 )
+			for( x = i; (x < LScr->Width) &&((RetVal= ContinueBlanking()) == OK); x += 4 )
 			{
 				Move( rp, midx, midy );
 				Draw( rp, x, 0 );
 			}
-			if(( RetVal = ContinueBlanking()) != OK )
-				break;
-			for( y = i;	y < LScr->Height; y += 4 )
+			for( y = i;	(y < LScr->Height) &&(RetVal == OK); y += 4 )
 			{
 				Move( rp, midx, midy );
 				Draw( rp, LScr->Width - 1, y );
 			}
-			if(( RetVal = ContinueBlanking()) != OK )
-				break;
-			for( x = LScr->Width - 1 - i; x > 0; x -= 4 )
+			for( x = LScr->Width - 1 - i; (x > 0) &&(RetVal == OK); x -= 4 )
 			{
 				Move( rp, midx, midy );
 				Draw( rp, x, LScr->Height - 1 );
 			}
-			if(( RetVal = ContinueBlanking()) != OK )
-				break;
-			for( y = LScr->Height - 1 - i; y > 0; y -= 4 )
+			for( y = LScr->Height - 1 - i; (y > 0) &&(RetVal == OK); y -= 4 )
 			{
 				Move( rp, midx, midy );
 				Draw( rp, 0, y );
 			}
-			if(( RetVal = ContinueBlanking()) != OK )
-				break;
 		}
 		break;
 	case 2:
@@ -183,6 +187,9 @@ LONG RenderLines( struct Screen *LScr, USHORT Mode )
 		}
 		break;
 	}
+
+	/* Blacken the border */
+	SetRGB4(&(LScr->ViewPort), 0, 0, 0, 0);
 
 	return RetVal;
 }

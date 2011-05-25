@@ -313,7 +313,9 @@ LONG Blank( PrefObject *Prefs )
 
 	SwarmScreen = OpenScreenTags( 0L, SA_Depth, 2, SA_Overscan, OSCAN_STANDARD,
 								 SA_DisplayID, Prefs[MODE].po_ModeID,
-								 SA_Quiet, TRUE, SA_Behind, TRUE, TAG_DONE );
+								 SA_ShowTitle, FALSE, SA_Title,
+								 "Garshnescreen", SA_Quiet, TRUE, SA_Behind,
+								 TRUE, TAG_DONE );
 	if( SwarmScreen )
 	{
 		SetRGB4( &( SwarmScreen->ViewPort ), 0, 0, 0, 0 );

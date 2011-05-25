@@ -20,24 +20,35 @@ UWORD Table4[] = {
 #define min( x, y ) ( x < y ? x : y )
 #endif
 
+#define BLOCK_DRAW 1
+#ifdef BLOCK_DRAW
+#define DrawSquare( i, j )\
+	RectFill( &Scr->RastPort, offx + side * (i-1), offy + side * (j-1),\
+			 offx + side * (i-1) + side - 2, offy + side * (j-1) + side - 2 )
+#else
+#define DrawSquare( i, j )\
+	WritePixel( &Scr->RastPort, offx + side * (i-1), offy + side * (j-1))
+#endif
+
+
 VOID Defaults( PrefObject *Prefs )
 {
-	Prefs[0].po_Level = 6;
+	Prefs[0].po_Level = 4;
 	Prefs[2].po_ModeID = getTopScreenMode();
 }
 
 LONG Blank( PrefObject *Prefs )
 {
-	LONG i, j, hei, wid, size, stable, side, offx, offy;
-	LONG *Phase[2] = { 0L, 0L }, Cur = 0, Pos, Species, Parent;
+	LONG i, j, hei, wid, ewid, ehei, size, stable = 0, side, offx, offy;
+	LONG *CurPhase, *OldPhase, *TmpPhase, Pos, Species, Parent;
 	LONG Width, Height, RetVal = OK;
 	struct Screen *Scr;
 	struct Window *Wnd;
 	
-	CurrentTime(( ULONG * )&offx, ( ULONG * )&offy );
-
 	Scr = OpenScreenTags( 0L, SA_DisplayID, Prefs[2].po_ModeID, SA_Quiet, TRUE,
-						 SA_Overscan, OSCAN_STANDARD, SA_Depth, 4, TAG_DONE );
+						 SA_Overscan, OSCAN_STANDARD, SA_Depth, 4,
+						 SA_ShowTitle, FALSE, SA_Title, "Garshnescreen",
+						 TAG_DONE );
 	if( !Scr )
 	{
 		RetVal = FAILED;
@@ -49,15 +60,17 @@ LONG Blank( PrefObject *Prefs )
 	Height = Scr->Height;
 	hei = Height / Prefs[0].po_Level;
 	wid = Width / Prefs[0].po_Level;
-	size = wid * hei;
+	ewid = wid + 2;
+	ehei = hei + 2;
+	size = ewid * ehei;
 	side = Height / hei;
 	offx = ( Width - side * wid ) / 2;
 	offy = ( Height - side * hei ) / 2;
 	
-	Phase[0] = AllocVec( sizeof( LONG ) * size, MEMF_ANY );
-	Phase[1] = AllocVec( sizeof( LONG ) * size, MEMF_ANY );
+	CurPhase = AllocVec( sizeof( LONG ) * size, MEMF_ANY );
+	OldPhase = AllocVec( sizeof( LONG ) * size, MEMF_ANY );
 	
-	if( !Phase[0] || !Phase[1] )
+	if( !CurPhase || !OldPhase )
 	{
 		RetVal = FAILED;
 		goto FAIL;
@@ -68,16 +81,14 @@ LONG Blank( PrefObject *Prefs )
 		
 	while( RetVal == OK )
 	{
-		for( j = 0; ( j < hei )&&( RetVal == OK ); j++ )
+		for( j = 1; ( j <= hei )&&( RetVal == OK ); j++ )
 		{
-			for( i = 0; i < wid; i++ )
+			for( i = 1; i <= wid; i++ )
 			{
-				Pos = j * hei + i;
-				Phase[1-Cur][Pos] = Phase[Cur][Pos] = RangeRand( 15 ) + 1;
-				SetAPen( &Scr->RastPort, Phase[Cur][Pos] );
-				RectFill( &Scr->RastPort, offx + side * i, offy + side * j,
-						 offx + side * i + side - 2,
-						 offy + side * j + side - 2 );
+				Pos = j * ewid + i;
+				CurPhase[Pos] = OldPhase[Pos] = RangeRand( 15 ) + 1;
+				SetAPen( &Scr->RastPort, CurPhase[Pos] );
+				DrawSquare( i, j );
 				if(!( Pos % 200 ))
 					if(( RetVal = ContinueBlanking()) != OK )
 						break;
@@ -86,37 +97,39 @@ LONG Blank( PrefObject *Prefs )
 
 		do
 		{
-			stable = TRUE;
-			CopyMemQuick( Phase[Cur], Phase[1-Cur], size * sizeof( LONG ));
-			for( j = 0; ( j < hei )&&( RetVal == OK ); j++ )
+			stable++;
+			CopyMemQuick( OldPhase+size-(ewid<<1), CurPhase, ewid<<2 );
+			CopyMemQuick( OldPhase+ewid, CurPhase+ewid, (size-(ewid<<1))<<2 );
+			CopyMemQuick( OldPhase+ewid, CurPhase+size-ewid, ewid<<2 );
+			for( i = 0, j = ewid-2; i < size; i += ewid, j += ewid )
+				CurPhase[i] = OldPhase[j];
+			for( i = ewid-1, j = 1; i < size; i += ewid, j += ewid )
+				CurPhase[i] = OldPhase[j];
+
+			for( j = 1; ( j <= hei )&&( RetVal == OK ); j++ )
 			{
-				for( i = 0; i < wid; i++ )
+				for( i = 1; i <= wid; i++ )
 				{
-					Pos = j * hei + i;
-					Species = Phase[Cur][Pos];
-					if( Species == 15 )
-						Parent = 1;
-					else
-						Parent = Species + 1;
-					if(( Phase[Cur][j*hei+((i+wid-1)%wid)] == Parent )||
-					   ( Phase[Cur][j*hei+((i+1)%wid)] == Parent )||
-					   ( Phase[Cur][((j+hei-1)%hei)*hei+i] == Parent )||
-					   ( Phase[Cur][((j+1)%hei)*hei+i] == Parent ))
+					Pos = j * ewid + i;
+					Species = CurPhase[Pos];
+					Parent = (( Species+1 )%15 )+1;
+					if(( CurPhase[Pos-1] == Parent )||
+					   ( CurPhase[Pos+1] == Parent )||
+					   ( CurPhase[Pos-ewid] == Parent )||
+					   ( CurPhase[Pos+ewid] == Parent ))
 					{
-						SetAPen( &Scr->RastPort, Phase[1-Cur][Pos] = Parent );
-						RectFill( &Scr->RastPort, offx + side * i,
-								 offy + side * j, offx + side * i + side - 2,
-								 offy + side * j + side - 2 );
-						stable = FALSE;
+						SetAPen( &Scr->RastPort, OldPhase[Pos] = Parent );
+						DrawSquare( i, j );
+						stable = 0;
 					}
-					if(!( Pos % 200 ))
-						if(( RetVal = ContinueBlanking()) != OK )
-							break;
 				}
+				RetVal = ContinueBlanking();
 			}
-			Cur = 1 - Cur;
+			TmpPhase = OldPhase;
+			OldPhase = CurPhase;
+			CurPhase = TmpPhase;
 		}
-		while( !stable &&( RetVal == OK ));
+		while(( stable < 2 )&&( RetVal == OK ));
 
 		for( i = 0; i < 50 && RetVal == OK; i++ )
 		{
@@ -127,10 +140,10 @@ LONG Blank( PrefObject *Prefs )
 	UnblankMousePointer( Wnd );
 	
  FAIL:
-	if( Phase[0] )
-		FreeVec( Phase[0] );
-	if( Phase[1] )
-		FreeVec( Phase[1] );	
+	if( CurPhase )
+		FreeVec( CurPhase );
+	if( OldPhase )
+		FreeVec( OldPhase );	
 	if( Scr )
 		CloseScreen( Scr );
 

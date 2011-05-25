@@ -361,9 +361,10 @@ LONG Blank( PrefObject *Prefs )
 	struct Screen *Scr;
 	struct Window *Wnd;
 	
-	Scr = OpenScreenTags( 0L, SA_Depth, 2, SA_Quiet, TRUE,
+	Scr = OpenScreenTags( 0L, SA_Depth, 2, SA_Quiet, TRUE, SA_ShowTitle, FALSE,
 						 SA_Overscan, OSCAN_STANDARD, SA_Behind, TRUE,
-						 SA_DisplayID, Prefs[4].po_ModeID, TAG_DONE );
+						 SA_DisplayID, Prefs[4].po_ModeID, SA_Title,
+						 "Garshnescreen", TAG_DONE );
 	if( Scr )
 	{
 		Wid = Scr->Width;
